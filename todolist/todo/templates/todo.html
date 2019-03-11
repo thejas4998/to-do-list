@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>To Do List</title>
+
+	
+
+		<!-- bootstrap cdn -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<!-- google fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="css/style.css">	
+	
+	<style type="text/css">
+	body{
+		/*background-color : #000000;*/
+		background-image: url("https://hdqwalls.com/download/mac-osx-captain-original-1920x1080.jpg");
+		
+		min-height: 100vh;
+		height: 100%;	
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+		color : white;
+	}
+
+	.hero{
+		background-color :rgba(3, 3, 3, 0.5);
+		min-height: 100vh;
+		min-width: 100vw;
+		top:0;
+		bottom:0;
+		position: absolute;
+		}
+
+	h1{
+		margin-top: 12rem;
+		margin-bottom: 0px;
+	}	
+
+	.container{
+		margin-top: 2rem;
+	}
+
+	.row{
+		margin-top: 2rem;
+	}
+
+	input[type="text"]
+	{
+		background : transparent;
+
+	}
+	.nobull {
+	list-style-type: none;
+	}
+	
+
+	</style>
+
+	
+</head>
+
+<body>
+
+	<div class="hero">
+	<div class="container">
+	<h1 class="text-center display-7"> What would you like to do today? </h1>
+	
+			<div class="row">
+				<form action = "/addTodo/" method = "post" class = "mx-auto">{%csrf_token%}
+						<div class="input-group">
+							<input type="text" name="content"/>
+							
+							<!--<input type="submit"value="Add"/>-->
+							<span><button type="submit" value="Add" class="btn btn-primary">Add</button></span>
+
+						</div>
+				</form>
+			</div>
+	</div>
+	<center>
+	<div class="container">
+	<ul class="nobull">
+			
+		{% for todo_item in all_items %}
+			
+				<li>{{todo_item.content}}
+				
+					<form action="/deleteitem/{{todo_item.id}}/"
+					style=" display : inline ;"
+					method="post"
+					>{%csrf_token%}
+
+					<!--<input type="submit" value="Done"/>-->
+					<span><button type="submit" value="Add" class="btn btn-success btn-sm">Done</button></span>
+
+					</form>
+								
+				</li></br>
+
+		{% endfor %}
+
+	</ul>
+	
+	</div>
+</center>
+</body>
+	
+</html>
+
+
+
